@@ -54,13 +54,6 @@ def get_week_day():
   week_day = week_list[datetime.date(today).weekday()]
   return week_day
 
-# 各种正数日
-def get_memorial_days_count(aim_date):
-  if aim_date is None:
-    print('没有设置 开始日')
-    return 0
-  delta = today - datetime.strptime(aim_date, "%Y-%m-%d")
-  return delta.days
 
 # 各种倒计时
 def get_counter_left():
@@ -174,7 +167,7 @@ for index, aim_date in enumerate(split_dates(end_date)):
   if index != 0:
     key_name = key_name + "_%d" % index
   data[key_name] = {
-    "value": get_counter_left(aim_date),
+    "value": get_counter_left(),
     "color": get_random_color()
   }
 
@@ -184,7 +177,7 @@ for index, aim_date in enumerate(split_dates(start_date)):
   if index != 0:
     key_name = key_name + "_%d" % index
   data[key_name] = {
-    "value": get_memorial_days_count(aim_date),
+    "value": get_memorial_days_count(),
     "color": get_random_color()
   }
 
