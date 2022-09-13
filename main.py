@@ -64,6 +64,11 @@ def get_memorial_days_count(aim_date):
 
 # 各种倒计时
 def get_counter_left(aim_date):
+  next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
+  if next < datetime.now():
+    next = next.replace(year=next.year + 1)
+  return (next - today).days
+
   if aim_date is None:
     return 0
 
