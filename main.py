@@ -65,13 +65,12 @@ def get_memorial_days_count(aim_date):
 # 各种倒计时
 def get_counter_left(aim_date):
   next = datetime.strptime(str(date.today().year) + "-" + aim_date, "%Y-%m-%d")
-  if next < datetime.now():
-    next = next.replace(year=next.year + 1)
-  return (next - today).days
 
   if aim_date is None:
     return 0
-
+  if next < datetime.now():
+    next = next.replace(year=next.year + 1)
+  return (next - today).days
 
 # 彩虹屁 接口不稳定，所以失败的话会重新调用，直到成功
 def get_words():
