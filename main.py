@@ -1,6 +1,7 @@
+import time
 from datetime import date, datetime, timedelta
+import  locale
 import math
-from webbrowser import get
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
 import requests
@@ -9,14 +10,12 @@ import random
 import re
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
+locale.setlocale(locale.LC_CTYPE, 'chinese')
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
 
-# 开始日正数
 start_date = os.getenv('START_DATE')
 city = os.getenv('CITY')
-# 生日，最终日倒数
-# birthday = os.getenv('BIRTHDAY')
-end_date = os.getenv('END_DATE')
+birthday = os.getenv('BIRTHDAY')
 
 app_id = os.getenv('APP_ID')
 app_secret = os.getenv('APP_SECRET')
@@ -54,8 +53,11 @@ def get_week_day():
   week_day = week_list[datetime.date(today).weekday()]
   return week_day
 
-# 各种倒计时
-def get_counter_left():
+# 纪念日正数
+def get_memorial_days_count():
+  if start_date is None:
+    print('没有设置 START_DATE')
+    return 0
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
   return delta.days
 
@@ -74,106 +76,69 @@ def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
 # 返回一个数组，循环产生变量
-# def split_birthday():
-#   if birthday is None:
-#     return None
-#   return birthday.split('\n')
-
-# 对传入的多个日期进行分割
-def split_dates(aim_dates):
-  if aim_dates is None:
+def split_birthday():
+  if birthday is None:
     return None
-  return aim_dates.split('\n')
+  return birthday.split('\n')
 
 weather = get_weather()
 if weather is None:
   print('获取天气失败')
   exit(422)
 data = {
-  # 城市
   "city": {
     "value": city,
     "color": get_random_color()
   },
-  # 今天日期
   "date": {
     "value": today.strftime('%Y年%m月%d日'),
     "color": get_random_color()
   },
-  # 今天周几
   "week_day": {
     "value": get_week_day(),
     "color": get_random_color()
   },
-  # 天气状况
   "weather": {
     "value": weather['weather'],
     "color": get_random_color()
   },
-  # 湿度
   "humidity": {
     "value": weather['humidity'],
     "color": get_random_color()
   },
-  # 风力
   "wind": {
     "value": weather['wind'],
     "color": get_random_color()
   },
-
   "air_data": {
     "value": weather['airData'],
     "color": get_random_color()
   },
-  # 空气质量
   "air_quality": {
     "value": weather['airQuality'],
     "color": get_random_color()
   },
-  # 温度
   "temperature": {
     "value": math.floor(weather['temp']),
     "color": get_random_color()
   },
-  # 最高温
   "highest": {
     "value": math.floor(weather['high']),
     "color": get_random_color()
   },
-  # 最低温度
   "lowest": {
     "value": math.floor(weather['low']),
     "color": get_random_color()
   },
-  # 每日一言
+  "love_days": {
+    "value": get_memorial_days_count(),
+    "color": get_random_color()
+  },
   "words": {
     "value": get_words(),
     "color": get_random_color()
   },
-  # 倒计时
-  # "endday_left": get_counter_left,
-  # "color": get_random_color()
 }
-
-# 倒计时添加到数据
-for index, aim_date in enumerate(split_dates(end_date)):
-  key_name = "endday_left"
-  if index != 0:
-    key_name = key_name + "_%d" % index
-  data[key_name] = {
-    "value": get_counter_left(),
-    "color": get_random_color()
-  }
-
-# 各种正计时
-for index, aim_date in enumerate(split_dates(start_date)):
-  key_name = "having_day"
-  if index != 0:
-    key_name = key_name + "_%d" % index
-  data[key_name] = {
-    "value": get_memorial_days_count(),
-    "color": get_random_color()
-  }
 
 if __name__ == '__main__':
   try:
