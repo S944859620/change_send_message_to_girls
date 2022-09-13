@@ -9,6 +9,8 @@ import os
 import random
 import re
 
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
 locale.setlocale(locale.LC_CTYPE, 'chinese')
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
