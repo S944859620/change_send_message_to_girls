@@ -1,7 +1,6 @@
 import time
 from datetime import date, datetime, timedelta
 import  locale
-export LC_ALL=C
 import math
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
@@ -76,12 +75,6 @@ def format_temperature(temperature):
 # 随机颜色
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
-
-# 返回一个数组，循环产生变量
-def split_birthday():
-  if birthday is None:
-    return None
-  return birthday.split('\n')
 
 weather = get_weather()
 if weather is None:
