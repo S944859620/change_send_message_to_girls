@@ -8,12 +8,9 @@ import requests
 import os
 import random
 import re
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
-locale.setlocale(locale.LC_CTYPE, 'chinese')
-locale.getlocale()
+locale.setlocale(locale.LC_CTYPE, 'zh_CN.UTF-8')
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
 
 start_date = os.getenv('START_DATE')
