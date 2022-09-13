@@ -12,6 +12,7 @@ import re
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
 locale.setlocale(locale.LC_CTYPE, 'chinese')
+locale.getlocale()
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
 
 start_date = os.getenv('START_DATE')
