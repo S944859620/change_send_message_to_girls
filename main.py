@@ -9,8 +9,7 @@ import os
 import random
 import re
 
-export LC_ALL=C.UTF-8
-export LANG=C.UTF-8
+
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
 locale.setlocale(locale.LC_CTYPE, 'chinese')
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
@@ -143,6 +142,8 @@ data = {
 }
 
 if __name__ == '__main__':
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
   try:
     client = WeChatClient(app_id, app_secret)
   except WeChatClientException as e:
