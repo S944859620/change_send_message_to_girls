@@ -63,7 +63,7 @@ def get_memorial_days_count(aim_date):
   return delta.days
 
 # 各种倒计时
-def get_counter_left(aim_date):
+def get_counter_left():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
   return delta.days
 
