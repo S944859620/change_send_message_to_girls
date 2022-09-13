@@ -64,7 +64,7 @@ def get_memorial_days_count(aim_date):
 
 # 各种倒计时
 def get_counter_left(aim_date):
-   if aim_date is None:
+  if aim_date is None:
     return 0
 
   # 为了经常填错日期的同学们
