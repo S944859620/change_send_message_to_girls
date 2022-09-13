@@ -66,10 +66,7 @@ def get_memorial_days_count(aim_date):
 def get_counter_left(aim_date):
   if aim_date is None:
     return 0
-    
-  if next < nowtime:
-    next = next.replace(year=next.year + 1)
-  return (next - today).days
+
 
 # 彩虹屁 接口不稳定，所以失败的话会重新调用，直到成功
 def get_words():
