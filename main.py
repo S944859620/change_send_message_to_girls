@@ -54,7 +54,6 @@ def get_week_day():
   week_day = week_list[datetime.date(today).weekday()]
   return week_day
 
-
 # 各种倒计时
 def get_counter_left():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
@@ -146,11 +145,6 @@ data = {
     "value": math.floor(weather['low']),
     "color": get_random_color()
   },
-  # 正计时
-  # "having_day": {
-  #   "value": get_memorial_days_count(),
-  #   "color": get_random_color()
-  # },
   # 每日一言
   "words": {
     "value": get_words(),
