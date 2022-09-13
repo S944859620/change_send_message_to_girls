@@ -1,6 +1,7 @@
 import time
 from datetime import date, datetime, timedelta
 import  locale
+export LC_ALL=C
 import math
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
@@ -142,8 +143,7 @@ data = {
 }
 
 if __name__ == '__main__':
-export LC_ALL=C.UTF-8
-export LANG=C.UTF-8
+
   try:
     client = WeChatClient(app_id, app_secret)
   except WeChatClientException as e:
